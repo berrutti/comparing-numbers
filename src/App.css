@@ -1,0 +1,28 @@
+.App {
+  text-align: center;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 0.5fr 1.5fr 1.5fr 0.5fr;
+  grid-template-rows: 0.5fr 2.5fr 0.5fr;
+  grid-template-areas: ". . . ." ". squares data ." ". . . .";
+  width: 100vw;
+  height: 100vh;
+}
+
+.squares {
+  position: relative;
+  grid-area: squares;
+  background-color: chartreuse;
+}
+
+.data {
+  position: relative;
+  grid-area: data;
+  background-color: darkkhaki;
+}
+
+.square {
+  position: absolute;
+}
