@@ -14,13 +14,11 @@
 .squares {
   position: relative;
   grid-area: squares;
-  background-color: chartreuse;
 }
 
 .data {
   position: relative;
   grid-area: data;
-  background-color: darkkhaki;
 }
 
 .square {
