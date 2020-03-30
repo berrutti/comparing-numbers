@@ -17,10 +17,11 @@ function Square({ squareData, square, selectedSquare, mapIndex }) {
         width: `${size}px`,
         height: `${size}px`,
         bottom: '0px',
-        config: config.molasses
+        config: config.molasses,
+        immediate: mapIndex > selectedSquare
     });
 
-    if (size < 1 || mapIndex > selectedSquare) {
+    if (size < 1) {
         return null;
     }
 
