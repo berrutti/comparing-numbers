@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useLayoutEffect, useRef } from 'react';
 import './App.css';
+import useWindowSize from './hooks/WindowSize';
 import Square from './components/Square';
 import Data from './components/Data';
 
@@ -48,33 +49,51 @@ function App() {
       color: '#07415E',
     },
   ]
-  const [index, setIndex] = useState(0);
+  const [currentSquareIndex, setCurrentSquareIndex] = useState(0);
+  const [maxSquareSize, setMaxSquareSize] = useState(0)
+  const squareRef = useRef();
 
-  const handleClick = (direction) => {
-    if (direction === 'back' && index !== 0) {
-      setIndex(index - 1);
-      return;
-    } else if (direction === 'forward' && index !== squaresData.length - 1) {
-      setIndex(index + 1);
-      return;
+  useEffect(() => {
+    const handleEvent = event => {
+      if (event.key === 'ArrowLeft' && currentSquareIndex !== 0) {
+        setCurrentSquareIndex(currentSquareIndex - 1);
+      } else if (event.key === 'ArrowRight' && currentSquareIndex !== squaresData.length - 1) {
+        setCurrentSquareIndex(currentSquareIndex + 1);
+      }
     }
-  }
+
+    window.addEventListener("keydown", handleEvent)
+    return () => {
+      window.removeEventListener("keydown", handleEvent)
+    }
+  }, [setCurrentSquareIndex, currentSquareIndex, squaresData])
+
+
+  const windowSize = useWindowSize();
+
+  useLayoutEffect(() => {
+    const squaresDiv = squareRef.current;
+    if (squaresDiv) {
+      const size = squaresDiv.offsetWidth > squaresDiv.offsetHeight
+        ? squaresDiv.offsetHeight
+        : squaresDiv.offsetWidth
+      setMaxSquareSize(size);
+    }
+  }, [setMaxSquareSize, windowSize])
 
   return (
     <div className="App">
       <div className="grid-container">
-        <div className="squares">
+        <div className="squares" ref={squareRef}>
           {
             squaresData
               .map((square, i) => {
-                return <Square squareData={squaresData} square={square} selectedSquare={index} mapIndex={i}></Square>
+                return <Square key={i} maxSquareSize={maxSquareSize} squareData={squaresData} square={square} selectedSquare={currentSquareIndex} mapIndex={i}></Square>
               })
           }
         </div>
-        <Data squaresData={squaresData} index={index}></Data>
+        <Data squaresData={squaresData} index={currentSquareIndex}></Data>
       </div>
-      <input type="button" onClick={() => handleClick('back')} value="Back" />
-      <input type="button" onClick={() => handleClick('forward')} value="Forward" />
     </div>
   );
 }
