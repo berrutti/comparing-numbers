@@ -16,7 +16,7 @@ function App() {
     {
       title: 'Net Worth:',
       subtitle: 'Pete Buttigieg',
-      avatar: 'someurl',
+      avatar: '//upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Pete_Buttigieg_by_Gage_Skidmore.jpg/220px-Pete_Buttigieg_by_Gage_Skidmore.jpg',
       number: 100000,
       color: '#007FAC',
     },
@@ -30,21 +30,21 @@ function App() {
     {
       title: 'Net Worth:',
       subtitle: 'Bernie Sanders',
-      avatar: null,
+      avatar: '//upload.wikimedia.org/wikipedia/commons/thumb/0/02/Bernie_Sanders_in_March_2020.jpg/220px-Bernie_Sanders_in_March_2020.jpg',
       number: 2000000,
       color: '#3DC5F4',
     },
     {
       title: 'Net Worth:',
       subtitle: 'Amy Klobuchar',
-      avatar: null,
+      avatar: '//upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Amy_Klobuchar%2C_official_portrait%2C_113th_Congress.jpg/220px-Amy_Klobuchar%2C_official_portrait%2C_113th_Congress.jpg',
       number: 2500000,
       color: '#007FAC',
     },
     {
       title: 'Net Worth:',
       subtitle: 'Joe Biden',
-      avatar: null,
+      avatar: '//upload.wikimedia.org/wikipedia/commons/thumb/6/60/Joe_Biden_February_2020_crop.jpg/220px-Joe_Biden_February_2020_crop.jpg',
       number: 9000000,
       color: '#07415E',
     },

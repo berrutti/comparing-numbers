@@ -37,8 +37,15 @@
   align-content: center;
 }
 
-
+.elements span {
+  font-size: xx-large;
+}
 
 .square {
   position: absolute;
+}
+
+.data-image {
+  object-fit: cover;
+  max-width: 30%;
 }
