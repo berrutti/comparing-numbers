@@ -88,7 +88,14 @@ function App() {
           {
             squaresData
               .map((square, i) => {
-                return <Square key={i} maxSquareSize={maxSquareSize} squareData={squaresData} square={square} selectedSquare={currentSquareIndex} mapIndex={i}></Square>
+                return <Square
+                  key={i}
+                  maxSquareSize={maxSquareSize}
+                  squareData={squaresData}
+                  square={square}
+                  selectedSquare={currentSquareIndex}
+                  mapIndex={i}>
+                </Square>
               })
           }
         </div>

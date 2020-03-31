@@ -1,5 +1,7 @@
 .App {
   text-align: center;
+  background-color: #46555A;
+  z-index: -999;
 }
 
 .grid-container {
@@ -14,12 +16,28 @@
 .squares {
   position: relative;
   grid-area: squares;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
 }
 
 .data {
   position: relative;
   grid-area: data;
+  color: white;
 }
+
+.elements {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  align-content: center;
+}
+
+
 
 .square {
   position: absolute;

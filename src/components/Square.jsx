@@ -4,14 +4,12 @@ import React from 'react';
 import { useSpring, animated, config } from 'react-spring';
 
 function Square({ maxSquareSize, squareData, square, selectedSquare, mapIndex }) {
-
     const percentage = square.number / squareData[selectedSquare].number;
     const size = maxSquareSize * percentage;
-    console.log(maxSquareSize);
     const props = useSpring({
         maxWidth: `${maxSquareSize}px`,
         maxHeight: `${maxSquareSize}px`,
-        zIndex: -mapIndex,
+        zIndex: squareData.length - mapIndex,
         backgroundColor: square.color,
         width: `${size}px`,
         height: `${size}px`,
