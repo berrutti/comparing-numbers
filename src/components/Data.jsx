@@ -1,10 +1,11 @@
 import React from 'react';
-import { useSpring, animated } from 'react-spring';
+import { useSpring, animated, config } from 'react-spring';
 import NumberFormat from 'react-number-format';
 
 function Data({ squaresData, index }) {
     const { value } = useSpring({
-        value: squaresData[index].number
+        value: squaresData[index].number,
+        config: config.slow,
     },);
 
     const AnimatedNumberFormat = animated(NumberFormat);
