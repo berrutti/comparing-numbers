@@ -49,3 +49,9 @@
   object-fit: cover;
   max-width: 30%;
 }
+
+.settings {
+  position: fixed !important;
+  right: 12px;
+  bottom: 12px;
+}

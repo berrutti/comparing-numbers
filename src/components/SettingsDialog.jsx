@@ -8,17 +8,13 @@ import {
   DialogContentText,
   DialogTitle,
   FormControl,
-  FormControlLabel,
   InputLabel,
   MenuItem,
   Select,
-  Switch,
   TextField
 } from '@material-ui/core';
 
-import { getCurrentMiliseconds } from '../utils/functions';
-
-function AddNumbersDialog({ open, handleClose, handleAddCard }) {
+function SettingsDialog({ open, setOpen }) {
   const [name, setName] = useState('');
   const [units, setUnits] = useState('currency');
 
@@ -32,31 +28,22 @@ function AddNumbersDialog({ open, handleClose, handleAddCard }) {
     setName(event.target.value);
   };
 
-  const handleSwitchChange = (event) => {
-    event.preventDefault();
-    setIsRegular(event.target.checked)
-  }
-
   const handleSubmit = (event) => {
     event.preventDefault();
     if (!event.target.errors) {
-      handleClose();
-      handleAddCard({ name, timeframe: units, lastClicked: getCurrentMiliseconds(), isRegular });
       setName('');
-      setIsRegular(true);
-      setUnits(Timeframe.Daily);
     }
   }
 
   return (
     <div>
-      <Dialog open={open} onClose={handleClose} aria-labelledby='form-dialog-title'>
+      <Dialog open={open} onClose={()=>setOpen(false)} aria-labelledby='form-dialog-title'>
         <form
           onSubmit={handleSubmit}>
-          <DialogTitle id='form-dialog-title'>Add a New Habit</DialogTitle>
+          <DialogTitle id='form-dialog-title'>Settings</DialogTitle>
           <DialogContent>
             <DialogContentText>
-              To add a new Habit, please add a Name and select a Timeframe.
+              You can complete, export and import your own data.
             </DialogContentText>
             <TextField
               fullWidth
@@ -69,15 +56,6 @@ function AddNumbersDialog({ open, handleClose, handleAddCard }) {
               type='text'
               value={name}
               onChange={handleNameChange} />
-
-            <FormControlLabel
-              label="Regular"
-              control={<Switch
-                checked={isRegular}
-                onChange={handleSwitchChange}
-                name="regular"
-                color="primary"
-              />} />
 
             <FormControl fullWidth>
               <InputLabel id='units-label'>Units</InputLabel>
@@ -92,11 +70,11 @@ function AddNumbersDialog({ open, handleClose, handleAddCard }) {
             </FormControl>
           </DialogContent>
           <DialogActions>
-            <Button onClick={handleClose} color='primary'>
+            <Button onClick={() => setOpen(false)} color='primary'>
               Cancel
           </Button>
             <Button type='submit' color='primary'>
-              Add
+              Save
           </Button>
           </DialogActions>
         </form>
@@ -105,4 +83,4 @@ function AddNumbersDialog({ open, handleClose, handleAddCard }) {
   );
 }
 
-export default AddNumbersDialog;
+export default SettingsDialog;

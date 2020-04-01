@@ -1,8 +1,11 @@
 import React, { useState, useEffect, useLayoutEffect, useRef } from 'react';
+import { Fab } from '@material-ui/core';
+import { Settings } from '@material-ui/icons';
 import './App.css';
 import useWindowSize from './hooks/WindowSize';
 import Square from './components/Square';
 import Data from './components/Data';
+import SettingsDialog from './components/SettingsDialog';
 
 function App() {
   const squaresData = [
@@ -53,6 +56,8 @@ function App() {
   const [maxSquareSize, setMaxSquareSize] = useState(0)
   const squareRef = useRef();
 
+  const [settingsOpen, setSettingsOpen] = useState(false);
+
   useEffect(() => {
     const handleEvent = event => {
       if (event.key === 'ArrowLeft' && currentSquareIndex !== 0) {
@@ -101,6 +106,8 @@ function App() {
         </div>
         <Data squaresData={squaresData} index={currentSquareIndex}></Data>
       </div>
+      <SettingsDialog open={settingsOpen} setOpen={setSettingsOpen}></SettingsDialog>
+      <Fab className='settings' color="secondary" onClick={() => setSettingsOpen(true)} aria-label="settings"><Settings /></Fab>
     </div>
   );
 }
