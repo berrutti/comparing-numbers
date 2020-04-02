@@ -5,7 +5,7 @@ import { useSpring, animated, config } from 'react-spring';
 
 function Square({ maxSquareSize, squareData, square, selectedSquare, mapIndex }) {
     const percentage = square.number / squareData[selectedSquare].number;
-    const size = maxSquareSize * percentage;
+    const size = maxSquareSize * Math.sqrt(percentage);
     const props = useSpring({
         maxWidth: `${maxSquareSize}px`,
         maxHeight: `${maxSquareSize}px`,
