@@ -5,10 +5,11 @@ import { useSpring, animated, config } from 'react-spring';
 
 function Square({ maxSquareSize, squareData, square, selectedSquare, mapIndex }) {
     const percentage = square.number / squareData[selectedSquare].number;
-    const size = maxSquareSize * Math.sqrt(percentage);
+    let size = Math.ceil(maxSquareSize * Math.sqrt(percentage));
+    if (size > maxSquareSize) {
+        size = maxSquareSize;
+    }
     const props = useSpring({
-        maxWidth: `${maxSquareSize}px`,
-        maxHeight: `${maxSquareSize}px`,
         zIndex: squareData.length - mapIndex,
         backgroundColor: square.color,
         width: `${size}px`,

@@ -51,6 +51,47 @@ function App() {
       number: 9000000,
       color: '#07415E',
     },
+    {
+      title: 'Net Worth:',
+      subtitle: 'Elizabeth Warren',
+      avatar: '//upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Elizabeth_Warren%2C_official_portrait%2C_114th_Congress.jpg/220px-Elizabeth_Warren%2C_official_portrait%2C_114th_Congress.jpg',
+      number: 12000000,
+      color: '#3DC5F4'
+    },
+    {
+      subtitle: 'F-32 Fighter Jet',
+      number: 115500000,
+      color: '#FFBF0E'
+    },
+    {
+      subtitle: 'Avengers: Endgame Budget',
+      number: 356000000,
+      color: '#F89625'
+    },
+    {
+      title: 'Net Worth (Inflation Adj.):',
+      subtitle: 'George Washington',
+      number: 525000000,
+      color: '#F37823'
+    },
+    {
+      title: 'Net Worth:',
+      subtitle: 'Tom Steyer',
+      number: 1600000000,
+      color: '#FFBF0E'
+    },
+    {
+      title: 'Net Worth:',
+      subtitle: 'Donald Trump',
+      number: 3100000000,
+      color: '#F89625'
+    },
+    {
+      title: 'Net Worth:',
+      subtitle: 'All US Presidents Ever',
+      number: 5000000000,
+      color: '#F37823'
+    },
   ]
   const [currentSquareIndex, setCurrentSquareIndex] = useState(0);
   const [maxSquareSize, setMaxSquareSize] = useState(0)

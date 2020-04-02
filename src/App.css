@@ -45,11 +45,6 @@
   position: absolute;
 }
 
-.data-image {
-  object-fit: cover;
-  max-width: 30%;
-}
-
 .settings {
   position: fixed !important;
   right: 12px;

@@ -1,7 +1,7 @@
 import React from 'react';
 //import { useSpring, animated, config } from 'react-spring';
 import { Grid, List, ListItem, ListItemAvatar, Avatar, ListItemText, ListItemSecondaryAction, IconButton } from '@material-ui/core';
-import { Folder, Delete } from '@material-ui/icons';
+import { Delete } from '@material-ui/icons';
 
 export default function NumbersList({ listData, setListData }) {
     const sortNumber = (firstElement, secondElement) => {
