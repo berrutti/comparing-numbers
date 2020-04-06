@@ -19,7 +19,7 @@ export default function NumbersList({ listData, setListData }) {
             <div className='className'>
                 <List dense={true}>
                     {listData.map((item, i) => {
-                        return <ListItem>
+                        return <ListItem key={i}>
                             <ListItemAvatar>
                                 <Avatar alt={item.title} src={item.avatar}></Avatar>
                             </ListItemAvatar>
@@ -28,7 +28,7 @@ export default function NumbersList({ listData, setListData }) {
                                 secondary={item.subtitle ? item.subtitle : null}
                             />
                             <ListItemSecondaryAction>
-                                <IconButton edge="end" aria-label="delete">
+                                <IconButton edge='end' aria-label='delete'>
                                     <Delete />
                                 </IconButton>
                             </ListItemSecondaryAction>

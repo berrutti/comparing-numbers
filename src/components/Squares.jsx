@@ -19,12 +19,11 @@ function Squares({ squaresData, index }) {
     }, [setMaxSquareSize, windowSize]);
 
     return (
-        <div className="squares-area" ref={squareRef}>
-            <div className="squares-container" style={{ height: maxSquareSize }}>
+        <div className='squares-area' ref={squareRef}>
+            <div className='squares-container' style={{ height: maxSquareSize }}>
                 {
                     squaresData
                         .map((square, i, array) => {
-                            console.log(square);
                             return <Square
                                 key={i}
                                 maxSquareSize={maxSquareSize}

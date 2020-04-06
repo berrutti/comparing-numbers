@@ -105,21 +105,21 @@ function App() {
       }
     }
 
-    window.addEventListener("keydown", handleEvent)
+    window.addEventListener('keydown', handleEvent)
     return () => {
-      window.removeEventListener("keydown", handleEvent)
+      window.removeEventListener('keydown', handleEvent)
     }
   }, [setCurrentSquareIndex, currentSquareIndex, squaresData])
 
 
   return (
-    <div className="App">
-      <div className="grid-container">
+    <div className='App'>
+      <div className='grid-container'>
         <Squares squaresData={squaresData} index={currentSquareIndex}></Squares>
         <Data squaresData={squaresData} index={currentSquareIndex}></Data>
       </div>
       <SettingsDialog open={settingsOpen} setOpen={setSettingsOpen}></SettingsDialog>
-      <Fab className='settings' color="secondary" onClick={() => setSettingsOpen(true)} aria-label="settings"><Settings /></Fab>
+      <Fab id='settings' color='secondary' onClick={() => setSettingsOpen(true)} aria-label='settings'><Settings /></Fab>
     </div>
   );
 }

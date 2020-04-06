@@ -8,7 +8,9 @@
   display: grid;
   grid-template-columns: 0.5fr 1.5fr 1.5fr 0.5fr;
   grid-template-rows: 0.5fr 2.5fr 0.5fr;
-  grid-template-areas: ". . . ." ". squares data ." ". . . .";
+  grid-template-areas:  '. . . .'
+                        '. squares data .'
+                        '. . . .';
   width: 100vw;
   height: 100vh;
 }
@@ -37,13 +39,20 @@
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
 }
-
-.elements span {
-  font-size: xx-large;
+.element-title {
+  display: block;
 }
 
-.settings {
+.element.subtitle {
+  display: block;
+}
+#settings {
   position: fixed !important;
-  right: 12px;
-  bottom: 12px;
+  right: 1.2rem;
+  bottom: 1.2rem;
+  opacity: .2;
+}
+
+#settings .MuiSvgIcon-root {
+  font-size: 2rem;
 }

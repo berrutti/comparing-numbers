@@ -118,8 +118,8 @@ function SettingsDialog({ open, setOpen }) {
                 id='units'
                 value={units}
                 onChange={handleTimeframeChange}>
-                <MenuItem value="currency">Currency</MenuItem>
-                <MenuItem value="other">Other</MenuItem>
+                <MenuItem value='currency'>Currency</MenuItem>
+                <MenuItem value='other'>Other</MenuItem>
               </Select>
             </FormControl>
           </DialogContent>
