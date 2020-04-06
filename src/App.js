@@ -1,9 +1,8 @@
-import React, { useState, useEffect, useLayoutEffect, useRef } from 'react';
+import React, { useState, useEffect,  } from 'react';
 import { Fab } from '@material-ui/core';
 import { Settings } from '@material-ui/icons';
 import './App.css';
-import useWindowSize from './hooks/WindowSize';
-import Square from './components/Square';
+import Squares from './components/Squares';
 import Data from './components/Data';
 import SettingsDialog from './components/SettingsDialog';
 
@@ -94,8 +93,6 @@ function App() {
     },
   ]
   const [currentSquareIndex, setCurrentSquareIndex] = useState(0);
-  const [maxSquareSize, setMaxSquareSize] = useState(0)
-  const squareRef = useRef();
 
   const [settingsOpen, setSettingsOpen] = useState(false);
 
@@ -115,36 +112,10 @@ function App() {
   }, [setCurrentSquareIndex, currentSquareIndex, squaresData])
 
 
-  const windowSize = useWindowSize();
-
-  useLayoutEffect(() => {
-    const squaresDiv = squareRef.current;
-    if (squaresDiv) {
-      const size = squaresDiv.offsetWidth > squaresDiv.offsetHeight
-        ? squaresDiv.offsetHeight
-        : squaresDiv.offsetWidth
-      setMaxSquareSize(size);
-    }
-  }, [setMaxSquareSize, windowSize])
-
   return (
     <div className="App">
       <div className="grid-container">
-        <div className="squares" ref={squareRef}>
-          {
-            squaresData
-              .map((square, i) => {
-                return <Square
-                  key={i}
-                  maxSquareSize={maxSquareSize}
-                  squareData={squaresData}
-                  square={square}
-                  selectedSquare={currentSquareIndex}
-                  mapIndex={i}>
-                </Square>
-              })
-          }
-        </div>
+        <Squares squaresData={squaresData} index={currentSquareIndex}></Squares>
         <Data squaresData={squaresData} index={currentSquareIndex}></Data>
       </div>
       <SettingsDialog open={settingsOpen} setOpen={setSettingsOpen}></SettingsDialog>

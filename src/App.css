@@ -13,11 +13,13 @@
   height: 100vh;
 }
 
-.squares {
-  position: relative;
+.squares-area {
   grid-area: squares;
+}
+
+.squares-container {
+  position: relative;
   top: 50%;
-  -ms-transform: translateY(-50%);
   transform: translateY(-50%);
 }
 
@@ -34,15 +36,10 @@
   width: 100%;
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
-  align-content: center;
 }
 
 .elements span {
   font-size: xx-large;
-}
-
-.square {
-  position: absolute;
 }
 
 .settings {
