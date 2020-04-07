@@ -11,16 +11,24 @@ function Data({ squaresData, index }) {
     });
 
     const AnimatedNumberFormat = animated(NumberFormat);
-
+    const getClassName = () => {
+        return element.avatar ? 'element-title align-left' : 'element-title';
+    }
     return (
         <div className='data'>
             <div className='elements'>
-                <Avatar alt={element.subtitle} src={element.avatar}></Avatar>
-                <AnimatedNumberFormat value={value.interpolate(x => x.toFixed(0))} displayType='text' thousandSeparator={true} prefix={'$'}></AnimatedNumberFormat>
-                <h1>
-                    {element.title && <span className='element-title'>{element.title}</span>}
-                    {element.subtitle && <span className='element-subtitle'>{element.subtitle}</span>}
-                </h1>
+                <div className='element-number'>
+                    <AnimatedNumberFormat value={value.interpolate(x => x.toFixed(0))} displayType='text' thousandSeparator={true} prefix={'$'}></AnimatedNumberFormat>
+                </div>
+                <div className='element-info'>
+                    {element.avatar && <div className='element-avatar'><Avatar alt={element.subtitle} src={element.avatar}></Avatar></div>}
+                    <div className='element-text'>
+                        <h1>
+                            {element.title && <span className={getClassName()}>{element.title}</span>}
+                            {element.subtitle && <span className={getClassName()}>{element.subtitle}</span>}
+                        </h1>
+                    </div>
+                </div>
             </div>
         </div>
     );

@@ -22,6 +22,7 @@
 .squares-container {
   position: relative;
   top: 50%;
+  -ms-transform: translateY(-50%);
   transform: translateY(-50%);
 }
 
@@ -36,16 +37,44 @@
   position: absolute;
   top: 50%;
   width: 100%;
+  height: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
 }
-.element-title {
-  display: block;
+
+.align-left {
+  text-align: left;
+}
+.element-avatar .MuiAvatar-root {
+  width: 10rem;
+  height: 10rem;
 }
 
-.element.subtitle {
-  display: block;
+.element-number {
+  height: 30%;
+  font-size: 3.5rem;
 }
+
+.element-info {
+  display: flex;
+  height: 70%;
+  justify-content: center;
+  align-items: center;
+}
+
+.element-title {
+  display: block;
+  font-weight: 200;
+}
+
+.element-subtitle {
+  display: block;
+  font-weight: 400;
+}
+
 #settings {
   position: fixed !important;
   right: 1.2rem;
