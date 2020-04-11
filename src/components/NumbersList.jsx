@@ -10,23 +10,16 @@ import {
   ListItemSecondaryAction
 } from '@material-ui/core';
 import { Delete } from '@material-ui/icons';
+import { byNumbers } from '../utils/constants';
 
-export default function NumbersList({ listData }) {
-  const sortNumber = (firstElement, secondElement) => {
-    if (firstElement.number < secondElement.number) {
-      return -1;
-    }
-    if (firstElement.number > secondElement.number) {
-      return 1;
-    }
-    return 0;
-  };
+export default function NumbersList({ data }) {
+  const sortedData = [...data].sort(byNumbers);
 
   return (
-    <Grid item xs={12} md={6}>
+    <Grid item xs={12}>
       <div className='className'>
         <List dense={true}>
-          {listData.map((item, i) => {
+          {sortedData.map((item, i) => {
             return <ListItem key={i}>
               <ListItemAvatar>
                 <Avatar alt={item.title} src={item.avatar}></Avatar>

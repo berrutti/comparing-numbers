@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { SliderPicker } from 'react-color'
 
 import {
+  Box,
   Button,
   Dialog,
   DialogActions,
@@ -12,11 +13,15 @@ import {
   InputLabel,
   MenuItem,
   Select,
+  Tab,
+  Tabs,
   TextField
 } from '@material-ui/core';
 import NumbersList from './NumbersList';
 
-function SettingsDialog({ open, setOpen, squaresData, setSquaresData }) {
+import { Phone, Favorite } from '@material-ui/icons';
+
+function SettingsDialog({ open, setOpen, config, setConfig }) {
   const [title, setTitle] = useState('');
   const [subtitle, setSubtitle] = useState('');
   const [units, setUnits] = useState('currency');
@@ -31,6 +36,23 @@ function SettingsDialog({ open, setOpen, squaresData, setSquaresData }) {
     event.preventDefault();
   }
 
+  const a11yProps = (index) => {
+    return {
+      id: `scrollable-force-tab-${index}`,
+      'aria-controls': `scrollable-force-tabpanel-${index}`,
+    };
+  }
+  const [tabIndex, setTabIndex] = useState(0);
+
+  const handleChange = (event, newValue) => {
+    setTabIndex(newValue);
+  };
+
+  const TabPanel = (props) => {
+    const { children, value, index } = props;
+    return (<>{value === index && <Box p={3}>{children}</Box>}</>);
+  }
+
   return (
     <div>
       <Dialog open={open} onClose={() => setOpen(false)} aria-labelledby='form-dialog-title'>
@@ -38,6 +60,21 @@ function SettingsDialog({ open, setOpen, squaresData, setSquaresData }) {
           onSubmit={handleSubmit}>
           <DialogTitle id='form-dialog-title'>Settings</DialogTitle>
           <DialogContent>
+            <Tabs
+              value={tabIndex}
+              onChange={handleChange}
+              variant="scrollable"
+              scrollButtons="on"
+              indicatorColor="primary"
+              textColor="primary"
+              aria-label="scrollable force tabs example"
+            >
+              <Tab label="Item One" icon={<Phone />} {...a11yProps(0)} />
+              <Tab label="Item Two" icon={<Favorite />} {...a11yProps(1)} />
+            </Tabs>
+            <TabPanel value={tabIndex} index={0}>Item One</TabPanel>
+            <TabPanel value={tabIndex} index={1}>Item Two</TabPanel>
+            <TabPanel value={tabIndex} index={2}>Item Three</TabPanel>
             <DialogContentText>
               You can complete, export and import your own data.
             </DialogContentText>
@@ -62,7 +99,7 @@ function SettingsDialog({ open, setOpen, squaresData, setSquaresData }) {
               type='text'
               value={subtitle}
               onChange={(event) => setSubtitle(event.target.value)} />
-            <SliderPicker 
+            <SliderPicker
               color={color}
               onChange={(color) => setColor(color.hex)}
             ></SliderPicker>
@@ -87,7 +124,7 @@ function SettingsDialog({ open, setOpen, squaresData, setSquaresData }) {
           </Button>
           </DialogActions>
         </form>
-        <NumbersList listData={squaresData.data} ></NumbersList>
+        <NumbersList data={config.data} ></NumbersList>
       </Dialog>
     </div>
   );

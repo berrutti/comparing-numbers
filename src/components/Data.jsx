@@ -1,13 +1,15 @@
 import React from 'react';
-import { useSpring, animated, config } from 'react-spring';
+import { useSpring, animated, config as springsConfig } from 'react-spring';
 import NumberFormat from 'react-number-format';
 import { Avatar } from '@material-ui/core';
+import { byNumbers } from '../utils/constants';
 
-function Data({ squaresData, index }) {
-  const element = squaresData.data[index];
+function Data({ config, index }) {
+  const sortedData = [...config.data].sort(byNumbers);
+  const element = sortedData[index];
   const { value } = useSpring({
     value: element.number,
-    config: config.slow,
+    config: springsConfig.slow,
   });
 
   const AnimatedNumberFormat = animated(NumberFormat);
@@ -18,11 +20,11 @@ function Data({ squaresData, index }) {
     return true;
   }
   const getPrefix = () => {
-    return squaresData.isCurrency ? '$' : null;
+    return config.isCurrency ? '$' : null;
   }
 
   const getSuffix = () => {
-    const suffix = squaresData.units;
+    const suffix = config.units;
     return suffix ? ' ' + suffix : null;
   }
 

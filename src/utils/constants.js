@@ -1,6 +1,7 @@
 export const usPoliticians = {
   isCurrency: true,
   units: null,
+  backgroundColor: '#46555A',
   data: [
     {
       title: 'Median Net Worth:',
@@ -91,20 +92,21 @@ export const usPoliticians = {
 export const cosmicCalendar = {
   isCurrency: false,
   units: 'years ago',
+  backgroundColor: '#46555A',
   data: [
-    {
-      title: 'Internet',
-      subtitle: 'was invented',
-      avatar: null,
-      number: 50,
-      color: '#3DC5F4',
-    },
     {
       title: 'Modern History:',
       subtitle: 'Period following "Post-classical" history',
       avatar: null,
       number: 435,
       color: '#007FAC',
+    },
+    {
+      title: 'Internet',
+      subtitle: 'was invented',
+      avatar: null,
+      number: 50,
+      color: '#3DC5F4',
     },
     {
       title: 'End of',
@@ -155,4 +157,14 @@ export const cosmicCalendar = {
       color: '#FFBF0E'
     }
   ]
+};
+
+export const byNumbers = (firstElement, secondElement) => {
+  if (firstElement.number < secondElement.number) {
+    return -1;
+  }
+  if (firstElement.number > secondElement.number) {
+    return 1;
+  }
+  return 0;
 };
