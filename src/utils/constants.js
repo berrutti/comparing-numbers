@@ -93,10 +93,10 @@ export const cosmicCalendar = {
   units: 'years ago',
   data: [
     {
-      title: 'According to our',
-      subtitle: 'current calendars',
+      title: 'Internet',
+      subtitle: 'was invented',
       avatar: null,
-      number: 1,
+      number: 50,
       color: '#3DC5F4',
     },
     {
@@ -112,12 +112,6 @@ export const cosmicCalendar = {
       avatar: null,
       number: 12000,
       color: '#07415E',
-    },
-    {
-      title: 'Agriculture',
-      subtitle: null,
-      number: 12500,
-      color: '#3DC5F4',
     },
     {
       title: 'Primitive Humans:',
@@ -149,28 +143,16 @@ export const cosmicCalendar = {
       color: '#F89625'
     },
     {
-      title: 'Oldest rocks',
-      subtitle: 'known on Earth',
-      number: 4400000000,
-      color: '#F37823'
-    },
-    {
       title: 'Milky Way',
       subtitle: 'Galaxy formed',
       number: 11000000000,
-      color: '#FFBF0E'
-    },
-    {
-      title: 'Oldest known',
-      subtitle: 'Gamma Ray Burst',
-      number: 13100000000,
-      color: '#F89625'
+      color: '#F37823'
     },
     {
       title: 'Big Bang:',
       subtitle: 'As seen through CBR',
       number: 13800000000,
-      color: '#F37823'
-    },
+      color: '#FFBF0E'
+    }
   ]
 };

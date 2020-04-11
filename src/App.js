@@ -16,7 +16,7 @@ function App() {
     const handleEvent = event => {
       if (event.key === 'ArrowLeft' && currentSquareIndex !== 0) {
         setCurrentSquareIndex(currentSquareIndex - 1);
-      } else if (event.key === 'ArrowRight' && currentSquareIndex !== squaresData.length - 1) {
+      } else if (event.key === 'ArrowRight' && currentSquareIndex !== squaresData.data.length - 1) {
         setCurrentSquareIndex(currentSquareIndex + 1);
       }
     }

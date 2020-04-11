@@ -3,7 +3,7 @@ import { useSpring, animated, config } from 'react-spring';
 
 function Square({ maxSquareSize, squaresData, square, selectedSquare, mapIndex }) {
   const percentage = square.number / squaresData[selectedSquare].number;
-  let size = Math.ceil(maxSquareSize * Math.sqrt(percentage));
+  let size = maxSquareSize * Math.sqrt(percentage);
   if (size > maxSquareSize) {
     size = maxSquareSize;
   }
@@ -18,7 +18,7 @@ function Square({ maxSquareSize, squaresData, square, selectedSquare, mapIndex }
     immediate: mapIndex > selectedSquare
   });
 
-  if (size < 1) {
+  if (size < .1) {
     return null;
   }
 
