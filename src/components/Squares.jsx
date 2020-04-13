@@ -2,7 +2,7 @@
 import React, { useLayoutEffect, useRef, useState } from 'react';
 import Square from './Square';
 import useWindowSize from '../hooks/WindowSize';
-import { byNumbers } from '../utils/constants';
+import { byNumbers } from '../utils/helperFunctions';
 
 function Squares({ data, index }) {
   const [maxSquareSize, setMaxSquareSize] = useState(0)

@@ -10,10 +10,10 @@ import {
   ListItemSecondaryAction
 } from '@material-ui/core';
 import { Delete } from '@material-ui/icons';
-import { byNumbers } from '../utils/constants';
+import { byNumbers } from '../../utils/helperFunctions';
 
-export default function NumbersList({ data }) {
-  const sortedData = [...data].sort(byNumbers);
+export default function ItemsTab({ modifiedConfig, setModifiedConfig }) {
+  const sortedData = [...modifiedConfig.data].sort(byNumbers);
 
   return (
     <Grid item xs={12}>
@@ -25,8 +25,8 @@ export default function NumbersList({ data }) {
                 <Avatar alt={item.title} src={item.avatar}></Avatar>
               </ListItemAvatar>
               <ListItemText
-                primary={item.title ? item.title : null}
-                secondary={item.subtitle ? item.subtitle : null}
+                primary={item.title ? `${item.title} ${item.subtitle}` : `${item.subtitle}`}
+                secondary={item.number}
               />
               <ListItemSecondaryAction>
                 <IconButton edge='end' aria-label='delete'>

@@ -4,8 +4,8 @@ import { Settings } from '@material-ui/icons';
 import './App.css';
 import Squares from './components/Squares';
 import Data from './components/Data';
-import SettingsDialog from './components/SettingsDialog';
-import { cosmicCalendar } from './utils/constants';
+import ConfigurationDialog from './components/ConfigurationDialog/ConfigurationDialog';
+import cosmicCalendar from './examples/cosmic-calendar.json';
 
 function App() {
   const [config, setConfig] = useState(cosmicCalendar);
@@ -36,7 +36,7 @@ function App() {
         <Squares data={config.data} index={squaresIndex}></Squares>
         <Data config={config} index={squaresIndex}></Data>
       </div>
-      <SettingsDialog open={settingsOpen} setOpen={setSettingsOpen} config={config} setConfig={setConfig}></SettingsDialog>
+      <ConfigurationDialog open={settingsOpen} setOpen={setSettingsOpen} config={config} setConfig={setConfig}></ConfigurationDialog>
       <Fab id='settings' color='secondary' onClick={() => setSettingsOpen(true)} aria-label='settings'><Settings /></Fab>
     </div>
   );

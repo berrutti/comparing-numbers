@@ -1,0 +1,78 @@
+{
+    "title": "Cosmic Calendar",
+    "isCurrency": false,
+    "units": "years ago",
+    "backgroundColor": "#46555A",
+    "data": [
+        {
+            "title": "Modern History:",
+            "subtitle": "Period following \"Post-classical\" history",
+            "avatar": null,
+            "number": 435,
+            "color": "#007FAC"
+        },
+        {
+            "title": "Internet",
+            "subtitle": "was invented",
+            "avatar": null,
+            "number": 50,
+            "color": "#3DC5F4"
+        },
+        {
+            "title": "End of",
+            "subtitle": "the Ice Age",
+            "avatar": null,
+            "number": 12000,
+            "color": "#07415E"
+        },
+        {
+            "title": "Primitive Humans:",
+            "subtitle": "Stone tools",
+            "avatar": null,
+            "number": 2500000,
+            "color": "#007FAC"
+        },
+        {
+            "title": "Extinction:",
+            "subtitle": "Non-avian dinosaurs die out",
+            "avatar": null,
+            "number": 65000000,
+            "color": "#07415E"
+        },
+        {
+            "title": "Dinosaurs:",
+            "subtitle": "started roaming the earth",
+            "avatar": null,
+            "number": 240000000,
+            "color": "#3DC5F4"
+        },
+        {
+            "title": null,
+            "subtitle": "Complex Cells",
+            "avatar": null,
+            "number": 2000000000,
+            "color": "#FFBF0E"
+        },
+        {
+            "title": "Biotic life:",
+            "subtitle": "First known remains",
+            "avatar": null,
+            "number": 4100000000,
+            "color": "#F89625"
+        },
+        {
+            "title": "Milky Way",
+            "subtitle": "Galaxy formed",
+            "avatar": null,
+            "number": 11000000000,
+            "color": "#F37823"
+        },
+        {
+            "title": "Big Bang:",
+            "subtitle": "As seen through CBR",
+            "avatar": null,
+            "number": 13800000000,
+            "color": "#FFBF0E"
+        }
+    ]
+}

@@ -2,7 +2,7 @@ import React from 'react';
 import { useSpring, animated, config as springsConfig } from 'react-spring';
 import NumberFormat from 'react-number-format';
 import { Avatar } from '@material-ui/core';
-import { byNumbers } from '../utils/constants';
+import { byNumbers } from '../utils/helperFunctions';
 
 function Data({ config, index }) {
   const sortedData = [...config.data].sort(byNumbers);
@@ -32,7 +32,7 @@ function Data({ config, index }) {
     <div className='data'>
       <div className='elements'>
         <div className='element-number'>
-          <AnimatedNumberFormat value={value.interpolate(x => x.toFixed(0))} displayType='text' thousandSeparator={shouldSeparateThousands()} prefix={getPrefix()} suffix={getSuffix()}></AnimatedNumberFormat>
+          <AnimatedNumberFormat value={value.to(x => x.toFixed(0))} displayType='text' thousandSeparator={shouldSeparateThousands()} prefix={getPrefix()} suffix={getSuffix()}></AnimatedNumberFormat>
         </div>
         <div className='element-info'>
           {element.avatar && <div className='element-avatar'><Avatar alt={element.subtitle} src={element.avatar}></Avatar></div>}
