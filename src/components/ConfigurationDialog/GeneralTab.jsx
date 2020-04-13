@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
-
-import { SliderPicker } from 'react-color';
+import React from 'react';
+import ColorPicker from '../ColorPicker/ColorPicker';
 
 import {
   DialogContentText,
@@ -12,13 +11,18 @@ import {
 } from '@material-ui/core';
 
 function GeneralTab({ modifiedConfig, setModifiedConfig }) {
-  const [displayPicker, setDisplayPicker] = useState(false);
+  const handleColorChange = (color) => {
+    setModifiedConfig(prevConfig => {
+      const newState = {
+        ...prevConfig,
+        backgroundColor: color.hex
+      };
 
-  const handleChange = (color) => {
-    console.log({ color: color.rgb });
+      return newState;
+    });
   };
+
   const handleConfigChange = (event) => {
-    debugger;
     setModifiedConfig(prevConfig => {
       const newState = {
         ...prevConfig,
@@ -61,37 +65,7 @@ function GeneralTab({ modifiedConfig, setModifiedConfig }) {
         </Select>
       </FormControl>
 
-      <div>
-        <div style={{
-          padding: '5px',
-          background: '#fff',
-          borderRadius: '1px',
-          boxShadow: '0 0 0 1px rgba(0,0,0,.1)',
-          display: 'inline-block',
-          cursor: 'pointer',
-        }} onClick={() => setDisplayPicker(!displayPicker)}>
-          <div style={{
-            width: '36px',
-            height: '14px',
-            borderRadius: '2px',
-            background: modifiedConfig.backgroundColor,
-          }} />
-        </div>
-        {displayPicker ? <div style={{
-          position: 'absolute',
-          zIndex: '2',
-        }}>
-          <div style={{
-            position: 'fixed',
-            top: '0px',
-            right: '0px',
-            bottom: '0px',
-            left: '0px',
-          }} onClick={() => setDisplayPicker(false)} />
-          <SliderPicker color={modifiedConfig.backgroundColor} onChange={handleChange} />
-        </div> : null}
-
-      </div>
+      <ColorPicker color={modifiedConfig.backgroundColor} label='Background Color' setColor={handleColorChange}></ColorPicker>
     </>)
 };
 
