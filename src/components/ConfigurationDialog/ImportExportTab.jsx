@@ -8,11 +8,25 @@ import {
 
 import FileSaver from 'file-saver';
 
-function ImportExportTab({ modifiedConfig, setModifiedConfig }) {
-  const [filename, setFilename] = useState(modifiedConfig.title);
+function ImportExportTab({
+  title,
+  setTitle,
+  backgroundColor,
+  setBackgroundColor,
+  isCurrency,
+  setIsCurrency,
+  data,
+  setData
+}) {
+  const [filename, setFilename] = useState(title);
 
   const onFileSave = () => {
-    const stringifiedConfig = JSON.stringify(modifiedConfig, null, 2);
+    const stringifiedConfig = JSON.stringify({
+      title,
+      backgroundColor,
+      isCurrency,
+      data
+    }, null, 2);
 
     const blob = new Blob([stringifiedConfig], { type: "text/plain;charset=utf-8" });
     FileSaver.saveAs(blob, filename ? `${filename}.json` : `comparing-numbers-config.json`);
@@ -27,25 +41,20 @@ function ImportExportTab({ modifiedConfig, setModifiedConfig }) {
     const reader = new FileReader();
     reader.onload = function (event) {
       try {
-        const importedRawState = JSON.parse(event.target.result);
-        const data = importedRawState.data.map(rawElement => {
+        const loadedState = JSON.parse(event.target.result);
+        const loadedData = loadedState.data.map(loadedElement => {
           return {
-            title: rawElement.title,
-            subtitle: rawElement.subtitle,
-            avatar: rawElement.avatar,
-            number: rawElement.number,
-            color: rawElement.color
+            title: loadedElement.title,
+            subtitle: loadedElement.subtitle,
+            avatar: loadedElement.avatar,
+            number: loadedElement.number,
+            color: loadedElement.color
           }
-        })
-        const newState = {
-          title: importedRawState.title,
-          isCurrency: importedRawState.isCurrency,
-          units: importedRawState.units,
-          backgroundColor: importedRawState.backgroundColor,
-          data
-        };
-        debugger;
-        setModifiedConfig(newState);
+        });
+        setTitle(loadedState.title);
+        setBackgroundColor(loadedState.setBackgroundColor);
+        setIsCurrency(loadedState.setIsCurrency);
+        setData(loadedData);
       } catch (error) {
         // TODO: Should display some kind of window with the error
         console.log(error);

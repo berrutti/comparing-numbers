@@ -14,9 +14,9 @@ function App() {
 
   useEffect(() => {
     const handleEvent = event => {
-      if (event.key === 'ArrowLeft' && squaresIndex !== 0) {
+      if (event.key === 'ArrowLeft' && !settingsOpen && squaresIndex !== 0) {
         setSquaresIndex(squaresIndex - 1);
-      } else if (event.key === 'ArrowRight' && squaresIndex !== config.data.length - 1) {
+      } else if (event.key === 'ArrowRight' && !settingsOpen && squaresIndex !== config.data.length - 1) {
         setSquaresIndex(squaresIndex + 1);
       }
     }
@@ -25,7 +25,7 @@ function App() {
     return () => {
       window.removeEventListener('keydown', handleEvent)
     }
-  }, [setSquaresIndex, squaresIndex, config])
+  }, [setSquaresIndex, squaresIndex, settingsOpen, config])
 
 
   return (

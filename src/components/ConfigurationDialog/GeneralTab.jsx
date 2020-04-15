@@ -3,37 +3,14 @@ import ColorPicker from '../ColorPicker/ColorPicker';
 
 import {
   DialogContentText,
-  TextField,
   FormControl,
   InputLabel,
   MenuItem,
-  Select
+  Select,
+  TextField
 } from '@material-ui/core';
 
-function GeneralTab({ modifiedConfig, setModifiedConfig }) {
-  const handleColorChange = (color) => {
-    setModifiedConfig(prevConfig => {
-      const newState = {
-        ...prevConfig,
-        backgroundColor: color.hex
-      };
-
-      return newState;
-    });
-  };
-
-  const handleConfigChange = (event) => {
-    setModifiedConfig(prevConfig => {
-      const newState = {
-        ...prevConfig,
-        [event.target.name]: event.target.value
-      };
-
-      return newState;
-    });
-  }
-
-
+function GeneralTab({ title, setTitle, isCurrency, setIsCurrency, backgroundColor, setBackgroundColor }) {
   return (
     <>
       <DialogContentText>
@@ -49,8 +26,8 @@ function GeneralTab({ modifiedConfig, setModifiedConfig }) {
         label='Title'
         name='title'
         type='text'
-        value={modifiedConfig.title}
-        onChange={handleConfigChange} />
+        value={title}
+        onChange={(event) => setTitle(event.target.value)} />
 
       <FormControl fullWidth>
         <InputLabel id='units-label'>Units</InputLabel>
@@ -58,14 +35,15 @@ function GeneralTab({ modifiedConfig, setModifiedConfig }) {
           labelId='units-label'
           id='isCurrency'
           name='isCurrency'
-          value={modifiedConfig.isCurrency}
-          onChange={handleConfigChange}>
+          margin='dense'
+          value={isCurrency}
+          onChange={(event) => setIsCurrency(event.target.value)}>
           <MenuItem value={true}>Currency</MenuItem>
           <MenuItem value={false}>Other</MenuItem>
         </Select>
       </FormControl>
 
-      <ColorPicker color={modifiedConfig.backgroundColor} label='Background Color' setColor={handleColorChange}></ColorPicker>
+      <ColorPicker color={backgroundColor} label='Background Color' setColor={setBackgroundColor}></ColorPicker>
     </>)
 };
 
