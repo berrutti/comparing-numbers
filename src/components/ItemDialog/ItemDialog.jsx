@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { SliderPicker } from 'react-color';
 
 import {
   Button,
@@ -8,16 +9,21 @@ import {
   DialogTitle,
   TextField
 } from '@material-ui/core';
-import ColorPicker from '../ColorPicker/ColorPicker';
 
-function ItemDialog({ open, setOpen, save, item }) {
-  const [color, setColor] = useState(item.color);
-  const [title, setTitle] = useState(item.title);
-  const [subtitle, setSubTitle] = useState(item.subtitle);
-  const [number, setNumber] = useState(item.number);
+function ItemDialog({ item, open, setOpen, save }) {
+  const [color, setColor] = useState('');
+  const [title, setTitle] = useState('');
+  const [subtitle, setSubTitle] = useState('');
+  const [number, setNumber] = useState(0);
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  useEffect(() => {
+    setColor(item.color);
+    setTitle(item.title);
+    setSubTitle(item.subtitle);
+    setNumber(item.number);
+  }, [item])
+
+  const handleSubmit = () => {
     save({
       color,
       title,
@@ -30,55 +36,33 @@ function ItemDialog({ open, setOpen, save, item }) {
   return (
     <>
       <Dialog open={open} onClose={() => setOpen(false)} aria-labelledby='item-dialog-title'>
-        <form
-          onSubmit={handleSubmit}>
-          <DialogTitle id='item-dialog-title'>Configuration</DialogTitle>
-          <DialogContent>
-            <TextField
-              fullWidth
-              autoFocus
-              autoComplete='off'
-              margin='dense'
-              id='title'
-              label='Title'
-              name='title'
-              type='text'
-              value={title}
-              onChange={(event) => setTitle(event.target.value)} />
-            <TextField
-              fullWidth
-              autoFocus
-              autoComplete='off'
-              margin='dense'
-              id='subtitle'
-              label='Subtitle'
-              name='subtitle'
-              type='text'
-              value={subtitle}
-              onChange={(event) => setSubTitle(event.target.value)} />
-            <TextField
-              fullWidth
-              autoFocus
-              required
-              autoComplete='off'
-              margin='dense'
-              id='number'
-              label='Number'
-              name='number'
-              type='number'
-              value={title}
-              onChange={(event) => setNumber(event.target.value)} />
-            <ColorPicker color={color} label='Square Color' setColor={setColor}></ColorPicker>
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={() => setOpen(false)} color='primary'>
-              Cancel
+        <DialogTitle id='item-dialog-title'>Configuration</DialogTitle>
+        <DialogContent>
+          <TextField fullWidth autoFocus autoComplete='off' margin='dense' id='title'
+            label='Title' name='title' type='text' value={title}
+            onChange={(event) => setTitle(event.target.value)} />
+
+          <TextField fullWidth autoComplete='off' margin='dense' id='subtitle'
+            label='Subtitle' name='subtitle' type='text' value={subtitle}
+            onChange={(event) => setSubTitle(event.target.value)} />
+
+          <TextField fullWidth required autoComplete='off' margin='dense'
+            id='number' label='Number' name='number' type='number' value={number}
+            onChange={(event) => setNumber(parseFloat(event.target.value))} />
+
+          <TextField fullWidth id='color' margin='dense' label='color' value={color}
+            onChange={(event) => setColor(event.target.value)} />
+
+          <SliderPicker width={'100%'} color={color} onChangeComplete={(color) => setColor(color.hex)} />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setOpen(false)} color='primary'>
+            Cancel
           </Button>
-            <Button type='submit' color='primary'>
-              Save
+          <Button onClick={handleSubmit} color='primary'>
+            Save
           </Button>
-          </DialogActions>
-        </form>
+        </DialogActions>
       </Dialog>
     </>
   );

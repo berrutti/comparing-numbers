@@ -9,34 +9,37 @@ import {
   ListItemText,
   ListItemSecondaryAction
 } from '@material-ui/core';
-import { Edit, Delete } from '@material-ui/icons';
-import { byNumbers } from '../../utils/helperFunctions';
+import { Edit } from '@material-ui/icons';
 import ItemDialog from '../ItemDialog/ItemDialog';
 
 export default function ItemsTab({ data, setData }) {
-  const sortedData = [...data].sort(byNumbers);
+  const [selectedIndex, setSelectedIndex] = useState(-1);
+  const [itemDialogValues, setItemDialogValues] = useState({});
   const [itemDialogOpen, setItemDialogOpen] = useState(false);
-  const [selectedIndex, setSelectedIndex] = useState(0);
-  const handleEditClick = (index) => {
-    debugger;
-    setSelectedIndex(index);
+
+  const handleEditClick = (selectedItem, itemIndex) => {
+    setSelectedIndex(itemIndex);
+    setItemDialogValues(selectedItem)
     setItemDialogOpen(true);
   }
 
-  const handleDeleteClick = (index) => {
-    setSelectedIndex(index);
-    console.log(index);
-  }
-
-  const handleDialogSave = (data) => {
-    console.log(data);
+  const handleItemDialogSave = (modifiedElement) => {
+    setData(previousData => {
+      if (selectedIndex >= 0) {
+        previousData[selectedIndex] = modifiedElement;
+        setSelectedIndex(-1);
+      }
+      return previousData;
+    });
+    setItemDialogValues({});
   };
+
   return (
     <>
       <Grid item xs={12}>
         <div className='className'>
           <List dense={true}>
-            {sortedData.map((item, key) => {
+            {data.map((item, key) => {
               return <ListItem key={key}>
                 {item.avatar && <ListItemAvatar>
                   <Avatar alt={item.title} src={item.avatar}></Avatar>
@@ -46,11 +49,8 @@ export default function ItemsTab({ data, setData }) {
                   secondary={item.number}
                 />
                 <ListItemSecondaryAction>
-                  <IconButton onClick={() => handleEditClick(key)} edge='end' aria-label='edit'>
+                  <IconButton onClick={() => handleEditClick(item, key)} edge='end' aria-label='edit'>
                     <Edit />
-                  </IconButton>
-                  <IconButton onClick={() => handleDeleteClick(key)} edge='end' aria-label='delete'>
-                    <Delete />
                   </IconButton>
                 </ListItemSecondaryAction>
               </ListItem>
@@ -58,7 +58,7 @@ export default function ItemsTab({ data, setData }) {
           </List>
         </div>
       </Grid>
-      <ItemDialog open={itemDialogOpen} setOpen={setItemDialogOpen} save={handleDialogSave} item={sortedData[selectedIndex]}></ItemDialog>
+      <ItemDialog item={itemDialogValues} open={itemDialogOpen} setOpen={setItemDialogOpen} save={handleItemDialogSave} ></ItemDialog>
     </>
   );
 }

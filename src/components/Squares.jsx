@@ -2,7 +2,6 @@
 import React, { useLayoutEffect, useRef, useState } from 'react';
 import Square from './Square';
 import useWindowSize from '../hooks/WindowSize';
-import { byNumbers } from '../utils/helperFunctions';
 
 function Squares({ data, index }) {
   const [maxSquareSize, setMaxSquareSize] = useState(0)
@@ -19,20 +18,18 @@ function Squares({ data, index }) {
     }
   }, [setMaxSquareSize, windowSize]);
 
-  const sortedData = [...data].sort(byNumbers);
-
   return (
     <div className='squares-area' ref={squareRef}>
       <div className='squares-container' style={{ height: maxSquareSize }}>
         {
-          sortedData.map((square, i, array) => {
+          data.map((square, i, array) => {
             return (
               <Square
                 key={i}
                 maxSquareSize={maxSquareSize}
-                data={array}
+                dataLength={data.length}
                 square={square}
-                selectedSquare={index}
+                selectedSquare={data[index]}
                 mapIndex={i}>
               </Square>
             );

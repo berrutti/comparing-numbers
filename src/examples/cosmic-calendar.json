@@ -1,22 +1,24 @@
 {
-    "title": "Cosmic Calendar",
-    "isCurrency": false,
-    "units": "years ago",
-    "backgroundColor": "#46555A",
+    "configuration": {
+        "title": "Cosmic Calendar",
+        "isCurrency": false,
+        "units": "years ago",
+        "backgroundColor": "#46555A"
+    },
     "data": [
-        {
-            "title": "Modern History:",
-            "subtitle": "Period following \"Post-classical\" history",
-            "avatar": null,
-            "number": 435,
-            "color": "#007FAC"
-        },
         {
             "title": "Internet",
             "subtitle": "was invented",
             "avatar": null,
             "number": 50,
             "color": "#3DC5F4"
+        },
+        {
+            "title": "Modern History:",
+            "subtitle": "Period following \"Post-classical\" history",
+            "avatar": null,
+            "number": 435,
+            "color": "#007FAC"
         },
         {
             "title": "End of",

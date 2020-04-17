@@ -8,27 +8,32 @@ import {
 
 import FileSaver from 'file-saver';
 
-function ImportExportTab({
-  title,
-  setTitle,
-  backgroundColor,
-  setBackgroundColor,
-  isCurrency,
-  setIsCurrency,
-  data,
-  setData
-}) {
-  const [filename, setFilename] = useState(title);
+function ImportExportTab({ data, setData, config, setConfig }) {
+  const [filename, setFilename] = useState(`${config.title}`);
+
+  const byNumber = (firstElement, secondElement) => {
+    if (firstElement.number < secondElement.number) {
+      return -1;
+    }
+    if (firstElement.number > secondElement.number) {
+      return 1;
+    }
+    return 0;
+  };
 
   const onFileSave = () => {
-    const stringifiedConfig = JSON.stringify({
-      title,
-      backgroundColor,
-      isCurrency,
-      data
-    }, null, 2);
+    const json = {
+      configuration: {
+        title: config.title,
+        backgroundColor: config.backgroundColor,
+        isCurrency: config.isCurrency,
+      },
+      data: data
+    };
 
-    const blob = new Blob([stringifiedConfig], { type: "text/plain;charset=utf-8" });
+    const stringifiedJson = JSON.stringify(json, null, 2);
+
+    const blob = new Blob([stringifiedJson], { type: "text/plain;charset=utf-8" });
     FileSaver.saveAs(blob, filename ? `${filename}.json` : `comparing-numbers-config.json`);
   }
 
@@ -41,19 +46,23 @@ function ImportExportTab({
     const reader = new FileReader();
     reader.onload = function (event) {
       try {
-        const loadedState = JSON.parse(event.target.result);
-        const loadedData = loadedState.data.map(loadedElement => {
+        const parsedJson = JSON.parse(event.target.result);
+        const loadedConfig = {
+          title: parsedJson.configuration?.title,
+          isCurrency: parsedJson.configuration?.isCurrency,
+          units: parsedJson.configuration?.units,
+          backgroundColor: parsedJson.configuration?.backgroundColor
+        }
+        setConfig(loadedConfig);
+        const loadedData = parsedJson.data?.sort(byNumber).map(e => {
           return {
-            title: loadedElement.title,
-            subtitle: loadedElement.subtitle,
-            avatar: loadedElement.avatar,
-            number: loadedElement.number,
-            color: loadedElement.color
+            title: e.title,
+            subtitle: e.subtitle,
+            avatar: e.avatar,
+            number: e.number,
+            color: e.color
           }
         });
-        setTitle(loadedState.title);
-        setBackgroundColor(loadedState.setBackgroundColor);
-        setIsCurrency(loadedState.setIsCurrency);
         setData(loadedData);
       } catch (error) {
         // TODO: Should display some kind of window with the error

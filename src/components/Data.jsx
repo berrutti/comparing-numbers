@@ -2,11 +2,8 @@ import React from 'react';
 import { useSpring, animated, config as springsConfig } from 'react-spring';
 import NumberFormat from 'react-number-format';
 import { Avatar } from '@material-ui/core';
-import { byNumbers } from '../utils/helperFunctions';
 
-function Data({ config, index }) {
-  const sortedData = [...config.data].sort(byNumbers);
-  const element = sortedData[index];
+function Data({ config, element }) {
   const { value } = useSpring({
     value: element.number,
     config: springsConfig.slow,

@@ -20,24 +20,14 @@ import GeneralTab from './GeneralTab';
 import ItemsTab from './ItemsTab';
 import ImportExportTab from './ImportExportTab';
 
-function SettingsDialog({ open, setOpen, config, setConfig }) {
-  const [backgroundColor, setBackgroundColor] = useState(config.backgroundColor);
-  const [title, setTitle] = useState(config.title);
-  const [isCurrency, setIsCurrency] = useState(config.isCurrency);
+function ConfigurationDialog({ open, setOpen, config, setConfig, data, setData }) {
   const [tabIndex, setTabIndex] = useState(0);
-  const [data, setData] = useState(config.data);
+  const [modifiedData, setModifiedData] = useState([...data]);
+  const [modifiedConfig, setModifiedConfig] = useState({ ...config });
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    setConfig(prevConfig => {
-      const newConfig = {
-        ...prevConfig,
-        title,
-        isCurrency,
-        backgroundColor,
-      }
-      return newConfig;
-    });
+  const handleSubmit = () => {
+    setConfig(modifiedConfig);
+    setData(modifiedData);
     setOpen(false);
   }
 
@@ -48,71 +38,60 @@ function SettingsDialog({ open, setOpen, config, setConfig }) {
     };
   }
 
-  const handleChange = (event, newValue) => {
-    event.preventDefault();
+  const handleChange = (_, newValue) => {
     setTabIndex(newValue);
   };
 
-  const TabPanel = (props) => {
-    const { children, value, index } = props;
+  const TabPanel = ({ children, value, index }) => {
     return (<>{value === index && <Box p={3}>{children}</Box>}</>);
   }
 
   return (
     <>
       <Dialog open={open} onClose={() => setOpen(false)} aria-labelledby='form-dialog-title'>
-        <form
-          onSubmit={handleSubmit}>
-          <DialogTitle id='form-dialog-title'>Configuration</DialogTitle>
-          <DialogContent>
-            <Tabs
-              value={tabIndex}
-              onChange={handleChange}
-              indicatorColor="primary">
-              <Tab label="General" icon={<Tune />} {...a11yProps(0)} />
-              <Tab label="Items" icon={<List />} {...a11yProps(1)} />
-              <Tab label="Import / Export" icon={<ImportExport />} {...a11yProps(1)} />
-            </Tabs>
-            <TabPanel value={tabIndex} index={0}>
-              <GeneralTab
-                backgroundColor={backgroundColor}
-                setBackgroundColor={setBackgroundColor}
-                isCurrency={isCurrency}
-                setIsCurrency={setIsCurrency}
-                title={title}
-                setTitle={setTitle}>
-              </GeneralTab>
-            </TabPanel>
-            <TabPanel value={tabIndex} index={1}>
-              <ItemsTab data={data} setData={setData}></ItemsTab>
-            </TabPanel>
-            <TabPanel value={tabIndex} index={2}>
-              <ImportExportTab
-                backgroundColor={backgroundColor}
-                setBackgroundColor={setBackgroundColor}
-                isCurrency={isCurrency}
-                setIsCurrency={setIsCurrency}
-                title={title}
-                setTitle={setTitle}
-                data={data}
-                setData={setData}>
-              </ImportExportTab>
-            </TabPanel>
+        <DialogTitle id='form-dialog-title'>Configuration</DialogTitle>
+        <DialogContent>
+          <Tabs
+            value={tabIndex}
+            onChange={handleChange}
+            indicatorColor="primary">
+            <Tab label="General" icon={<Tune />} {...a11yProps(0)} />
+            <Tab label="Items" icon={<List />} {...a11yProps(1)} />
+            <Tab label="Import / Export" icon={<ImportExport />} {...a11yProps(1)} />
+          </Tabs>
+          <TabPanel value={tabIndex} index={0}>
+            <GeneralTab
+              config={modifiedConfig}
+              setConfig={setModifiedConfig}>
+            </GeneralTab>
+          </TabPanel>
+          <TabPanel value={tabIndex} index={1}>
+            <ItemsTab
+              data={modifiedData}
+              setData={setModifiedData}>
+            </ItemsTab>
+          </TabPanel>
+          <TabPanel value={tabIndex} index={2}>
+            <ImportExportTab
+              data={modifiedData}
+              setData={setModifiedData}
+              config={modifiedConfig}
+              setConfig={setModifiedConfig}>
+            </ImportExportTab>
+          </TabPanel>
 
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={() => setOpen(false)} color='primary'>
-              Cancel
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setOpen(false)} color='primary'>
+            Cancel
           </Button>
-            <Button type='submit' color='primary'>
-              Save
+          <Button onClick={handleSubmit} color='primary'>
+            Save
           </Button>
-          </DialogActions>
-        </form>
-
+        </DialogActions>
       </Dialog>
     </>
   );
 }
 
-export default SettingsDialog;
+export default ConfigurationDialog;

@@ -8,15 +8,16 @@ import ConfigurationDialog from './components/ConfigurationDialog/ConfigurationD
 import cosmicCalendar from './examples/cosmic-calendar.json';
 
 function App() {
-  const [config, setConfig] = useState(cosmicCalendar);
+  const [config, setConfig] = useState(cosmicCalendar.configuration);
+  const [data, setData] = useState(cosmicCalendar.data);
   const [squaresIndex, setSquaresIndex] = useState(0);
-  const [settingsOpen, setSettingsOpen] = useState(false);
+  const [configurationDialogOpen, setConfigurationDialogOpen] = useState(false);
 
   useEffect(() => {
     const handleEvent = event => {
-      if (event.key === 'ArrowLeft' && !settingsOpen && squaresIndex !== 0) {
+      if (event.key === 'ArrowLeft' && !configurationDialogOpen && squaresIndex !== 0) {
         setSquaresIndex(squaresIndex - 1);
-      } else if (event.key === 'ArrowRight' && !settingsOpen && squaresIndex !== config.data.length - 1) {
+      } else if (event.key === 'ArrowRight' && !configurationDialogOpen && squaresIndex !== data.length - 1) {
         setSquaresIndex(squaresIndex + 1);
       }
     }
@@ -25,7 +26,7 @@ function App() {
     return () => {
       window.removeEventListener('keydown', handleEvent)
     }
-  }, [setSquaresIndex, squaresIndex, settingsOpen, config])
+  }, [setSquaresIndex, squaresIndex, configurationDialogOpen, data])
 
 
   return (
@@ -33,11 +34,18 @@ function App() {
       className='App'
       style={{ backgroundColor: config.backgroundColor }}>
       <div className='grid-container'>
-        <Squares data={config.data} index={squaresIndex}></Squares>
-        <Data config={config} index={squaresIndex}></Data>
+        <Squares data={data} index={squaresIndex}></Squares>
+        <Data config={config} element={data[squaresIndex]}></Data>
       </div>
-      <ConfigurationDialog open={settingsOpen} setOpen={setSettingsOpen} config={config} setConfig={setConfig}></ConfigurationDialog>
-      <Fab id='settings' color='secondary' onClick={() => setSettingsOpen(true)} aria-label='settings'><Settings /></Fab>
+      <ConfigurationDialog
+        open={configurationDialogOpen}
+        setOpen={setConfigurationDialogOpen}
+        config={config}
+        setConfig={setConfig}
+        data={data}
+        setData={setData}>
+      </ConfigurationDialog>
+      <Fab id='settings' color='secondary' onClick={() => setConfigurationDialogOpen(true)} aria-label='settings'><Settings /></Fab>
     </div>
   );
 }

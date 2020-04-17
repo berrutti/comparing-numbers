@@ -1,8 +1,10 @@
 {
-    "title": "US Politicians",
-    "isCurrency": true,
-    "units": null,
-    "backgroundColor": "#46555A",
+    "configuration": {
+        "title": "US Politicians",
+        "isCurrency": true,
+        "units": null,
+        "backgroundColor": "#46555A"
+    },
     "data": [
         {
             "title": "Median Net Worth:",

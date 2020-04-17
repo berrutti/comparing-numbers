@@ -1,5 +1,5 @@
 import React from 'react';
-import ColorPicker from '../ColorPicker/ColorPicker';
+import { SliderPicker } from 'react-color';
 
 import {
   DialogContentText,
@@ -10,7 +10,24 @@ import {
   TextField
 } from '@material-ui/core';
 
-function GeneralTab({ title, setTitle, isCurrency, setIsCurrency, backgroundColor, setBackgroundColor }) {
+function GeneralTab({ config, setConfig }) {
+  const handleInputChanges = (event) => {
+    setConfig(latestConfig => {
+      return {
+        ...latestConfig,
+        [event.target.name]: event.target.value
+      }
+    })
+  }
+
+  const handleColorChange = (newColor) => {
+    setConfig(latestConfig => {
+      return {
+        ...latestConfig,
+        backgroundColor: newColor.hex
+      }
+    })
+  }
   return (
     <>
       <DialogContentText>
@@ -26,9 +43,8 @@ function GeneralTab({ title, setTitle, isCurrency, setIsCurrency, backgroundColo
         label='Title'
         name='title'
         type='text'
-        value={title}
-        onChange={(event) => setTitle(event.target.value)} />
-
+        value={config.title}
+        onChange={handleInputChanges} />
       <FormControl fullWidth>
         <InputLabel id='units-label'>Units</InputLabel>
         <Select
@@ -36,14 +52,20 @@ function GeneralTab({ title, setTitle, isCurrency, setIsCurrency, backgroundColo
           id='isCurrency'
           name='isCurrency'
           margin='dense'
-          value={isCurrency}
-          onChange={(event) => setIsCurrency(event.target.value)}>
+          value={config.isCurrency}
+          onChange={handleInputChanges}>
           <MenuItem value={true}>Currency</MenuItem>
           <MenuItem value={false}>Other</MenuItem>
         </Select>
       </FormControl>
-
-      <ColorPicker color={backgroundColor} label='Background Color' setColor={setBackgroundColor}></ColorPicker>
+      <TextField
+        fullWidth
+        id='backgroundColor'
+        margin='dense'
+        label='Background Color'
+        value={config.backgroundColor}
+        onChange={handleInputChanges} />
+      <SliderPicker width={'100%'} color={config.backgroundColor} onChangeComplete={handleColorChange} />
     </>)
 };
 
