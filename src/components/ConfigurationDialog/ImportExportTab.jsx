@@ -25,8 +25,9 @@ function ImportExportTab({ data, setData, config, setConfig }) {
     const json = {
       configuration: {
         title: config.title,
-        backgroundColor: config.backgroundColor,
         isCurrency: config.isCurrency,
+        units: config.units,
+        backgroundColor: config.backgroundColor,
       },
       data: data
     };
