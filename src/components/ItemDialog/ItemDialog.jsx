@@ -11,24 +11,29 @@ import {
 } from '@material-ui/core';
 
 function ItemDialog({ item, open, setOpen, save }) {
-  const [color, setColor] = useState('');
+  debugger;
+  console.log(item);
   const [title, setTitle] = useState('');
-  const [subtitle, setSubTitle] = useState('');
+  const [subtitle, setSubtitle] = useState('');
+  const [avatar, setAvatar] = useState('');
   const [number, setNumber] = useState(0);
+  const [color, setColor] = useState('');
 
   useEffect(() => {
-    setColor(item.color);
-    setTitle(item.title);
-    setSubTitle(item.subtitle);
+    setTitle(item.title ? item.title : '');
+    setSubtitle(item.subtitle ? item.subtitle : '');
+    setAvatar(item.avatar ? item.avatar : '');
     setNumber(item.number);
+    setColor(item.color ? item.color : '');
   }, [item])
 
   const handleSubmit = () => {
     save({
-      color,
       title,
       subtitle,
-      number
+      avatar,
+      number,
+      color
     })
     setOpen(false);
   }
@@ -44,7 +49,11 @@ function ItemDialog({ item, open, setOpen, save }) {
 
           <TextField fullWidth autoComplete='off' margin='dense' id='subtitle'
             label='Subtitle' name='subtitle' type='text' value={subtitle}
-            onChange={(event) => setSubTitle(event.target.value)} />
+            onChange={(event) => setSubtitle(event.target.value)} />
+
+          <TextField fullWidth autoComplete='off' margin='dense' id='avatar'
+            label='Avatar URL' name='avatar' type='text' value={avatar}
+            onChange={(event) => setAvatar(event.target.value)} />
 
           <TextField fullWidth required autoComplete='off' margin='dense'
             id='number' label='Number' name='number' type='number' value={number}
