@@ -11,11 +11,13 @@ import {
   Tabs
 } from '@material-ui/core';
 import {
+  Apps,
   ImportExport,
   List,
   Tune
 } from '@material-ui/icons';
 
+import GalleryTab from './GalleryTab';
 import GeneralTab from './GeneralTab';
 import ItemsTab from './ItemsTab';
 import ImportExportTab from './ImportExportTab';
@@ -53,11 +55,14 @@ function ConfigurationDialog({ open, setOpen, config, setConfig, data, setData }
         <DialogContent>
           <Tabs
             value={tabIndex}
+            variant="scrollable"
+            scrollButtons="on"
             onChange={handleChange}
             indicatorColor="primary">
             <Tab label="General" icon={<Tune />} {...a11yProps(0)} />
             <Tab label="Items" icon={<List />} {...a11yProps(1)} />
-            <Tab label="Import / Export" icon={<ImportExport />} {...a11yProps(1)} />
+            <Tab label="Import / Export" icon={<ImportExport />} {...a11yProps(2)} />
+            <Tab label="Gallery" icon={<Apps />} {...a11yProps(3)} />
           </Tabs>
           <TabPanel value={tabIndex} index={0}>
             <GeneralTab
@@ -78,6 +83,12 @@ function ConfigurationDialog({ open, setOpen, config, setConfig, data, setData }
               config={modifiedConfig}
               setConfig={setModifiedConfig}>
             </ImportExportTab>
+          </TabPanel>
+          <TabPanel value={tabIndex} index={3}>
+            <GalleryTab
+              setData={setModifiedData}
+              setConfig={setModifiedConfig}>
+            </GalleryTab>
           </TabPanel>
 
         </DialogContent>

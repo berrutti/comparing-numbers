@@ -76,7 +76,8 @@ function ImportExportTab({ data, setData, config, setConfig }) {
   return (
     <>
       <DialogContentText>
-        You can complete, export and import your own data.
+        You can Import a valid JSON to fill the options and data.  <br />
+        You can also Export a JSON with your modifications.
       </DialogContentText>
       <TextField
         fullWidth
