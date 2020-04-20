@@ -2,32 +2,25 @@ import React from 'react';
 import { SliderPicker } from 'react-color';
 
 import {
+  Checkbox,
   DialogContentText,
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Select,
+  FormControlLabel,
   TextField
 } from '@material-ui/core';
 
 function GeneralTab({ config, setConfig }) {
+  const handleIsCurrencyChanges = (event) => {
+    setConfig(latestConfig => ({ ...latestConfig, isCurrency: event.target.checked }))
+  }
+
   const handleInputChanges = (event) => {
-    setConfig(latestConfig => {
-      return {
-        ...latestConfig,
-        [event.target.name]: event.target.value
-      }
-    })
+    setConfig(latestConfig => ({ ...latestConfig, [event.target.name]: event.target.value }));
   }
 
   const handleColorChange = (newColor) => {
-    setConfig(latestConfig => {
-      return {
-        ...latestConfig,
-        backgroundColor: newColor.hex
-      }
-    })
+    setConfig(latestConfig => ({ ...latestConfig, backgroundColor: newColor.hex }));
   }
+
   return (
     <>
       <DialogContentText>
@@ -45,19 +38,17 @@ function GeneralTab({ config, setConfig }) {
         type='text'
         value={config.title}
         onChange={handleInputChanges} />
-      <FormControl fullWidth>
-        <InputLabel id='units-label'>Units</InputLabel>
-        <Select
-          labelId='units-label'
-          id='isCurrency'
-          name='isCurrency'
-          margin='dense'
-          value={config.isCurrency}
-          onChange={handleInputChanges}>
-          <MenuItem value={true}>Currency</MenuItem>
-          <MenuItem value={false}>Other</MenuItem>
-        </Select>
-      </FormControl>
+      <FormControlLabel
+        control={<Checkbox checked={config.isCurrency} onChange={handleIsCurrencyChanges} name="isCurrency" />}
+        label="Is Currency"
+      />
+      {!config.isCurrency && <TextField
+        fullWidth
+        id='units'
+        margin='dense'
+        label='Units'
+        value={config.units}
+        onChange={handleInputChanges} />}
       <TextField
         fullWidth
         id='backgroundColor'
