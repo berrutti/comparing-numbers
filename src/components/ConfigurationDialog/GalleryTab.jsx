@@ -14,10 +14,9 @@ function GalleryTab({ setData, setConfig }) {
   const [dropdownElements] = useState(importedElements)
 
   const handleSelectChanges = (event) => {
-    const value = parseInt(event.target.value);
-    debugger;
-    setData(dropdownElements[value].data);
-    setConfig(dropdownElements[value].configuration);
+    const index = parseInt(event.target.value);
+    setData(dropdownElements[index].data);
+    setConfig(dropdownElements[index].configuration);
   }
   return (
     <>
@@ -32,6 +31,7 @@ function GalleryTab({ setData, setConfig }) {
           id='gallery-elements'
           name='elements'
           margin='dense'
+          value={0}
           onClick={handleSelectChanges}>
           {dropdownElements.map((element, index) => <MenuItem key={index} value={index}>{element.configuration.title}</MenuItem>)}
         </Select>
