@@ -11,8 +11,6 @@ import {
 } from '@material-ui/core';
 
 function ItemDialog({ item, open, setOpen, save }) {
-  debugger;
-  console.log(item);
   const [title, setTitle] = useState('');
   const [subtitle, setSubtitle] = useState('');
   const [avatar, setAvatar] = useState('');
