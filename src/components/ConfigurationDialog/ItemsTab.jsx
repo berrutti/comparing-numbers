@@ -26,6 +26,7 @@ export default function ItemsTab({ data, setData }) {
   }
 
   const handleDeleteClick = (itemIndex) => {
+    debugger;
     setSelectedIndex(itemIndex);
     setDeleteDialogOpen(true);
   }
@@ -68,7 +69,7 @@ export default function ItemsTab({ data, setData }) {
                   <IconButton onClick={() => handleEditClick(item, key)} edge='end' aria-label='edit'>
                     <Edit />
                   </IconButton>
-                  <IconButton onClick={() => handleDeleteClick(item, key)} edge='end' aria-label='delete'>
+                  <IconButton onClick={() => handleDeleteClick(key)} edge='end' aria-label='delete'>
                     <Delete />
                   </IconButton>
                 </ListItemSecondaryAction>
