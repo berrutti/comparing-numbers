@@ -10,36 +10,38 @@ import {
   TextField
 } from '@material-ui/core';
 
-function ItemDialog({ item, open, setOpen, save }) {
+function ItemDialog({ dialogTitle, item, open, setOpen, save }) {
   const [title, setTitle] = useState('');
   const [subtitle, setSubtitle] = useState('');
   const [avatar, setAvatar] = useState('');
-  const [number, setNumber] = useState(0);
+  const [number, setNumber] = useState('');
   const [color, setColor] = useState('');
 
   useEffect(() => {
-    setTitle(item.title ? item.title : '');
-    setSubtitle(item.subtitle ? item.subtitle : '');
-    setAvatar(item.avatar ? item.avatar : '');
-    setNumber(item.number);
-    setColor(item.color ? item.color : '');
+    setTitle(item?.title || '');
+    setSubtitle(item?.subtitle || '');
+    setAvatar(item?.avatar || '');
+    setNumber(item?.number || '');
+    setColor(item?.color || '');
   }, [item])
 
-  const handleSubmit = () => {
-    save({
+  const handleSave = () => {
+    debugger;
+    const element = {
       title,
       subtitle,
       avatar,
       number,
       color
-    })
+    }
+    save(element);
     setOpen(false);
   }
 
   return (
     <>
       <Dialog open={open} onClose={() => setOpen(false)} aria-labelledby='item-dialog-title'>
-        <DialogTitle id='item-dialog-title'>Configuration</DialogTitle>
+        <DialogTitle id='item-dialog-title'>{dialogTitle}</DialogTitle>
         <DialogContent>
           <TextField fullWidth autoFocus autoComplete='off' margin='dense' id='title'
             label='Title' name='title' type='text' value={title}
@@ -57,7 +59,7 @@ function ItemDialog({ item, open, setOpen, save }) {
             id='number' label='Number' name='number' type='number' value={number}
             onChange={(event) => setNumber(parseFloat(event.target.value))} />
 
-          <TextField fullWidth id='color' margin='dense' label='color' value={color}
+          <TextField fullWidth id='color' margin='dense' label='Color' value={color}
             onChange={(event) => setColor(event.target.value)} />
 
           <SliderPicker width={'100%'} color={color} onChangeComplete={(color) => setColor(color.hex)} />
@@ -66,7 +68,7 @@ function ItemDialog({ item, open, setOpen, save }) {
           <Button onClick={() => setOpen(false)} color='primary'>
             Cancel
           </Button>
-          <Button onClick={handleSubmit} color='primary'>
+          <Button onClick={handleSave} color='primary'>
             Save
           </Button>
         </DialogActions>

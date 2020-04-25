@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import {
   Avatar,
-  Grid,
   IconButton,
   List,
   ListItem,
@@ -9,24 +8,34 @@ import {
   ListItemText,
   ListItemSecondaryAction
 } from '@material-ui/core';
-import { Delete, Edit } from '@material-ui/icons';
+import { AddCircle, Delete, Edit } from '@material-ui/icons';
 import ItemDialog from '../ItemDialog';
 import ConfirmationDialog from '../ConfirmationDialog';
 
 export default function ItemsTab({ data, setData }) {
   const [selectedIndex, setSelectedIndex] = useState(-1);
-  const [itemDialogValues, setItemDialogValues] = useState({});
-  const [itemDialogOpen, setItemDialogOpen] = useState(false);
+  const [editValues, setItemDialogValues] = useState({});
+  const [editOpen, setEditOpen] = useState(false);
+  const [addOpen, setAddOpen] = useState(false);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
+
+  const byNumber = (a, b) => {
+    if (a.number > b.number) {
+      return -1;
+    }
+    if (b.number > a.number) {
+      return 1;
+    }
+    return 0;
+  }
 
   const handleEditClick = (selectedItem, itemIndex) => {
     setSelectedIndex(itemIndex);
     setItemDialogValues(selectedItem)
-    setItemDialogOpen(true);
+    setEditOpen(true);
   }
 
   const handleDeleteClick = (itemIndex) => {
-    debugger;
     setSelectedIndex(itemIndex);
     setDeleteDialogOpen(true);
   }
@@ -40,7 +49,7 @@ export default function ItemsTab({ data, setData }) {
     setSelectedIndex(-1);
   }
 
-  const handleItemDialogSave = (modifiedElement) => {
+  const handleEditSave = (modifiedElement) => {
     setData(previousData => {
       if (selectedIndex >= 0) {
         previousData[selectedIndex] = modifiedElement;
@@ -51,38 +60,52 @@ export default function ItemsTab({ data, setData }) {
     setItemDialogValues({});
   };
 
+  const handleAddNew = (newElement) => {
+    setData(previousData => {
+      previousData.push(newElement)
+      return previousData.sort(byNumber);
+    });
+    setItemDialogValues({});
+  };
+
   return (
     <>
-      <Grid item xs={12}>
-        <div className='className'>
-          <List dense={true}>
-            {data.map((item, key) => {
-              return <ListItem key={key}>
-                {item.avatar && <ListItemAvatar>
-                  <Avatar alt={item.title} src={item.avatar}></Avatar>
-                </ListItemAvatar>}
-                <ListItemText
-                  primary={item.title ? `${item.title} ${item.subtitle}` : `${item.subtitle}`}
-                  secondary={item.number}
-                />
-                <ListItemSecondaryAction>
-                  <IconButton onClick={() => handleEditClick(item, key)} edge='end' aria-label='edit'>
-                    <Edit />
-                  </IconButton>
-                  <IconButton onClick={() => handleDeleteClick(key)} edge='end' aria-label='delete'>
-                    <Delete />
-                  </IconButton>
-                </ListItemSecondaryAction>
-              </ListItem>
-            })}
-          </List>
-        </div>
-      </Grid>
+      <IconButton aria-label='add' onClick={() => setAddOpen(true)}>
+        <AddCircle />
+      </IconButton>
+      <List dense={true}>
+        {data.map((item, key) => {
+          return <ListItem key={key}>
+            {item.avatar && <ListItemAvatar>
+              <Avatar alt={item.title} src={item.avatar}></Avatar>
+            </ListItemAvatar>}
+            <ListItemText
+              primary={item.title ? `${item.title} ${item.subtitle}` : `${item.subtitle}`}
+              secondary={item.number}
+            />
+            <ListItemSecondaryAction>
+              <IconButton onClick={() => handleEditClick(item, key)} edge='end' aria-label='edit'>
+                <Edit />
+              </IconButton>
+              <IconButton onClick={() => handleDeleteClick(key)} edge='end' aria-label='delete'>
+                <Delete />
+              </IconButton>
+            </ListItemSecondaryAction>
+          </ListItem>
+        })}
+      </List>
       <ItemDialog
-        item={itemDialogValues}
-        open={itemDialogOpen}
-        setOpen={setItemDialogOpen}
-        save={handleItemDialogSave}>
+        dialogTitle='Edit Item'
+        item={editValues}
+        open={editOpen}
+        setOpen={setEditOpen}
+        save={handleEditSave}>
+      </ItemDialog>
+      <ItemDialog
+        dialogTitle='Add Item'
+        open={addOpen}
+        setOpen={setAddOpen}
+        save={handleAddNew}>
       </ItemDialog>
       <ConfirmationDialog
         open={deleteDialogOpen}

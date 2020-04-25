@@ -40,7 +40,7 @@ function GeneralTab({ config, setConfig }) {
         onChange={handleInputChanges} />
       <FormControlLabel
         control={<Checkbox checked={config.isCurrency} onChange={handleIsCurrencyChanges} name="isCurrency" />}
-        label="Is Currency"
+        label="Display Number as Currency"
       />
       {!config.isCurrency && <TextField
         fullWidth

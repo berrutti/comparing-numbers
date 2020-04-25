@@ -11,13 +11,13 @@ import {
   Tabs
 } from '@material-ui/core';
 import {
-  Apps,
   ImportExport,
+  QuestionAnswer,
   List,
   Tune
 } from '@material-ui/icons';
 
-import GalleryTab from './GalleryTab';
+import FaqTab from './FaqTab';
 import GeneralTab from './GeneralTab';
 import ItemsTab from './ItemsTab';
 import ImportExportTab from './ImportExportTab';
@@ -40,7 +40,7 @@ function ConfigurationDialog({ open, setOpen, config, setConfig, data, setData }
     };
   }
 
-  const handleChange = (_, newValue) => {
+  const handleTabChange = (e, newValue) => {
     setTabIndex(newValue);
   };
 
@@ -57,12 +57,12 @@ function ConfigurationDialog({ open, setOpen, config, setConfig, data, setData }
             value={tabIndex}
             variant="scrollable"
             scrollButtons="on"
-            onChange={handleChange}
+            onChange={handleTabChange}
             indicatorColor="primary">
             <Tab label="General" icon={<Tune />} {...a11yProps(0)} />
             <Tab label="Items" icon={<List />} {...a11yProps(1)} />
             <Tab label="Import / Export" icon={<ImportExport />} {...a11yProps(2)} />
-            <Tab label="Gallery" icon={<Apps />} {...a11yProps(3)} />
+            <Tab label="FAQ" icon={<QuestionAnswer />} {...a11yProps(3)} />
           </Tabs>
           <TabPanel value={tabIndex} index={0}>
             <GeneralTab
@@ -85,10 +85,7 @@ function ConfigurationDialog({ open, setOpen, config, setConfig, data, setData }
             </ImportExportTab>
           </TabPanel>
           <TabPanel value={tabIndex} index={3}>
-            <GalleryTab
-              setData={setModifiedData}
-              setConfig={setModifiedConfig}>
-            </GalleryTab>
+            <FaqTab />
           </TabPanel>
 
         </DialogContent>

@@ -5,11 +5,11 @@ import './App.css';
 import Squares from './components/Squares';
 import Data from './components/Data';
 import ConfigurationDialog from './components/ConfigurationDialog/ConfigurationDialog';
-import cosmicCalendar from './examples/cosmic-calendar.json';
+import usPoliticians from './examples/us-politicians.json';
 
 function App() {
-  const [config, setConfig] = useState(cosmicCalendar.configuration);
-  const [data, setData] = useState(cosmicCalendar.data);
+  const [config, setConfig] = useState(usPoliticians.configuration);
+  const [data, setData] = useState(usPoliticians.data);
   const [squaresIndex, setSquaresIndex] = useState(0);
   const [configurationDialogOpen, setConfigurationDialogOpen] = useState(false);
 
