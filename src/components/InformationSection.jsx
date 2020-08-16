@@ -1,9 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSpring, animated, config as springsConfig } from 'react-spring';
 import NumberFormat from 'react-number-format';
 import { Avatar } from '@material-ui/core';
 
-function Data({ config, element }) {
+function InformationSection({ config, index, data }) {
+  const element = data[index];
+
+  useEffect(() => {
+    // Effect to preload every image
+    data.forEach((element) => {
+      const img = new Image();
+      img.src = element.avatar;
+    });
+  },[data]);
+
   const { value } = useSpring({
     value: element.number,
     config: springsConfig.slow,
@@ -26,7 +36,7 @@ function Data({ config, element }) {
   }
 
   return (
-    <div className='data'>
+    <div className='information-section'>
       <div className='elements'>
         <div className='element-number'>
           <AnimatedNumberFormat value={value.to(x => x.toFixed(0))} displayType='text' thousandSeparator={shouldSeparateThousands()} prefix={getPrefix()} suffix={getSuffix()}></AnimatedNumberFormat>
@@ -45,4 +55,4 @@ function Data({ config, element }) {
   );
 }
 
-export default Data;
+export default InformationSection;

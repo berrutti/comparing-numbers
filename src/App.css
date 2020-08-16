@@ -25,7 +25,7 @@
   transform: translateY(-50%);
 }
 
-.data {
+.information-section {
   position: relative;
   grid-area: data;
   color: white;

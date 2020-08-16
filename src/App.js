@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Fab } from '@material-ui/core';
 import { Settings } from '@material-ui/icons';
 import './App.css';
-import Squares from './components/Squares';
-import Data from './components/Data';
+import SquaresSection from './components/SquaresSection';
+import InformationSection from './components/InformationSection';
 import ConfigurationDialog from './components/ConfigurationDialog/ConfigurationDialog';
 import usPoliticians from './examples/us-politicians.json';
 
@@ -34,8 +34,8 @@ function App() {
       className='App'
       style={{ backgroundColor: config.backgroundColor }}>
       <div className='grid-container'>
-        <Squares data={data} index={squaresIndex}></Squares>
-        <Data config={config} element={data[squaresIndex]}></Data>
+        <SquaresSection data={data} index={squaresIndex}></SquaresSection>
+        <InformationSection config={config} index={squaresIndex} data={data}></InformationSection>
       </div>
       <ConfigurationDialog
         open={configurationDialogOpen}
