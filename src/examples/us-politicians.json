@@ -86,7 +86,7 @@
         {
             "title": "NET WORTH:",
             "subtitle": "Donald Trump",
-            "avatar": "//upload.wikimedia.org/wikipedia/commons/thumb/5/56/Donald_Trump_official_portrait.jpg/800px-Donald_Trump_official_portrait.jpg",
+            "avatar": "//upload.wikimedia.org/wikipedia/commons/thumb/5/56/Donald_Trump_official_portrait.jpg/220px-Donald_Trump_official_portrait.jpg",
             "number": 3100000000,
             "color": "#F89625"
         },
@@ -149,7 +149,7 @@
         {
             "title": "NET WORTH:",
             "subtitle": "Michael Bloomberg",
-            "avatar": "//upload.wikimedia.org/wikipedia/commons/thumb/e/e2/Mike_Bloomberg_Headshot.jpg/800px-Mike_Bloomberg_Headshot.jpg",
+            "avatar": "//upload.wikimedia.org/wikipedia/commons/thumb/e/e2/Mike_Bloomberg_Headshot.jpg/220px-Mike_Bloomberg_Headshot.jpg",
             "number": 62800000000,
             "color": "#EF4725"
         }

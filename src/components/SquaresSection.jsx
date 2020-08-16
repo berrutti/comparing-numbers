@@ -3,7 +3,7 @@ import React, { useLayoutEffect, useRef, useState } from 'react';
 import Square from './Square';
 import useWindowSize from '../hooks/WindowSize';
 
-function Squares({ data, index }) {
+function SquaresSection({ data, index }) {
   const [maxSquareSize, setMaxSquareSize] = useState(0)
   const squareRef = useRef();
   const windowSize = useWindowSize();
@@ -39,4 +39,4 @@ function Squares({ data, index }) {
     </div>);
 }
 
-export default Squares;
+export default SquaresSection;
