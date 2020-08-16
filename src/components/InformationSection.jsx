@@ -20,12 +20,6 @@ function InformationSection({ config, index, data }) {
   });
 
   const AnimatedNumberFormat = animated(NumberFormat);
-  const getClassName = () => {
-    return element.avatar ? 'element-title align-left' : 'element-title';
-  }
-  const shouldSeparateThousands = () => {
-    return true;
-  }
   const getPrefix = () => {
     return config.isCurrency ? '$' : null;
   }
@@ -39,14 +33,14 @@ function InformationSection({ config, index, data }) {
     <div className='information-section'>
       <div className='elements'>
         <div className='element-number'>
-          <AnimatedNumberFormat value={value.to(x => x.toFixed(0))} displayType='text' thousandSeparator={shouldSeparateThousands()} prefix={getPrefix()} suffix={getSuffix()}></AnimatedNumberFormat>
+          <AnimatedNumberFormat value={value.to(x => x.toFixed(0))} displayType='text' thousandSeparator={true} prefix={getPrefix()} suffix={getSuffix()}></AnimatedNumberFormat>
         </div>
         <div className='element-info'>
           {element.avatar && <div className='element-avatar'><Avatar alt={element.subtitle} src={element.avatar}></Avatar></div>}
-          <div className='element-text'>
+          <div className={`element-text ${element.avatar? 'half-width' : ''}`}>
             <h1>
-              {element.title && <span className={getClassName()}>{element.title}</span>}
-              {element.subtitle && <span className={getClassName()}>{element.subtitle}</span>}
+              {element.title && <span className={`element-title ${element.avatar ? 'align-left' : ''}`}>{element.title}</span>}
+              {element.subtitle && <span className={`element-subtitle ${element.avatar ? 'align-left' : ''}`}>{element.subtitle}</span>}
             </h1>
           </div>
         </div>
